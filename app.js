@@ -12,7 +12,9 @@ const errorController = require("./controllers/error");
 const User = require("./models/user");
 
 const MONGODB_URI =
-  "mongodb://David_atlas:qlGgjv8gSaoXSXcc@cluster0-shard-00-00.tbj07.mongodb.net:27017,cluster0-shard-00-01.tbj07.mongodb.net:27017,cluster0-shard-00-02.tbj07.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-vxzmm6-shard-0&authSource=admin&retryWrites=true&w=majority";
+  "mongodb://David_atlas:" +
+  process.env.MONGO_ATLAS_PW +
+  "@cluster0-shard-00-00.tbj07.mongodb.net:27017,cluster0-shard-00-01.tbj07.mongodb.net:27017,cluster0-shard-00-02.tbj07.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-vxzmm6-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const app = express();
 const store = new MongoDBStore({
@@ -70,7 +72,7 @@ mongoose
   .connect(MONGODB_URI)
   .then((result) => {
     console.log("CONNECTED!");
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000);
   })
   .catch((err) => {
     console.log(err);
