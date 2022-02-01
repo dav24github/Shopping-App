@@ -3,9 +3,7 @@ const sgMail = require("@sendgrid/mail");
 
 const User = require("../models/user");
 
-sgMail.setApiKey(
-  "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"
-);
+sgMail.setApiKey(process.env.MONGO_ATLAS_PW);
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error");
