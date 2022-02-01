@@ -1,17 +1,9 @@
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
+const sgMail = require("@sendgrid/mail");
 
 const User = require("../models/user");
 
-const transporter = nodemailer.createTransport(
-  sendgridTransport({
-    auth: {
-      api_key:
-        "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",
-    },
-  })
-);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error");
@@ -100,12 +92,19 @@ exports.postSignup = (req, res, next) => {
         })
         .then((result) => {
           res.redirect("/login");
-          return transporter.sendMail({
-            to: email,
-            from: "shop@node-complete.com",
-            subject: "Signup succeeded",
-            html: "<h1>You succesfully signed up!</h1>",
-          });
+          return sgMail
+            .send({
+              to: email, // Change to your recipient
+              from: "main@davidesossa.com", // Change to your verified sender
+              subject: "Sending with SendGrid is Fun",
+              html: "<h1>You succesfully signed up!</h1>",
+            })
+            .then(() => {
+              console.log("Email sent");
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         })
         .catch((err) => {
           console.log(err);
