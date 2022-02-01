@@ -3,7 +3,9 @@ const sgMail = require("@sendgrid/mail");
 
 const User = require("../models/user");
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(
+  "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"
+);
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error");
