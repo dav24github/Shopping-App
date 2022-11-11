@@ -1,9 +1,10 @@
+require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const sgMail = require("@sendgrid/mail");
 
 const User = require("../models/user");
 
-sgMail.setApiKey(process.env.MONGO_ATLAS_PW);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error");
