@@ -19,15 +19,13 @@
                                     <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
                                 </div>
                                 <div class="card__content">
-                                    <h2 class="product__price">$
-                                        <%= product.price %>
-                                    </h2>
+                                    <h2 class="product__price">$<%= product.price %></h2>
                                     <p class="product__description">
                                         <%= product.description %>
                                     </p>
                                 </div>
                                 <div class="card__actions">
-                                    <a href="/products/<%= product._id %>" class="btn">Details</a>
+                                    <a href="/products/<%= product._id %>" class="btn">Detalles</a>
                                     <% if (isAuthenticated) { %>
                                         <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                                     <% } %>
@@ -36,7 +34,7 @@
                             <% } %>
                     </div>
                     <% } else { %>
-                        <h1>No Products Found!</h1>
+                        <h1>¡No se encontró ningún producto!</h1>
                         <% } %>
             </main>
             <%- include('../includes/end.ejs') %>
