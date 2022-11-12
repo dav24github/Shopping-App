@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const csrf = require("csurf");
-const flash = require("connect-flash");
+const csrf = require("csurf"); // CSRF token req.csrfToken()
+const flash = require("connect-flash"); // All requests will have a req.flash() function that can be used for flash messages
 
 const errorController = require("./controllers/error");
 const User = require("./models/user");
@@ -58,6 +58,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
+  // res.locals is an object that contains the local variables for the response (available for the view)
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.csrfToken = req.csrfToken();
   next();

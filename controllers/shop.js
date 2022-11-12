@@ -31,6 +31,7 @@ exports.getProduct = (req, res, next) => {
 
 exports.getIndex = (req, res, next) => {
   Product.find()
+    .limit(3)
     .then((products) => {
       res.render("shop/index", {
         prods: products,
